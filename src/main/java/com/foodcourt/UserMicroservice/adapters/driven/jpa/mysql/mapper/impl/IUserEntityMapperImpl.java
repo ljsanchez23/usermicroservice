@@ -8,6 +8,7 @@ import com.foodcourt.UserMicroservice.domain.model.User;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 @Component
 public class IUserEntityMapperImpl implements IUserEntityMapper {
@@ -40,33 +41,17 @@ public class IUserEntityMapperImpl implements IUserEntityMapper {
 
     @Override
     public User toModel(UserEntity userEntity) {
-        if ( userEntity == null ) {
-            return null;
-        }
-        Long id = null;
-        String name = null;
-        String lastName = null;
-        Integer idDocument = 0;
-        String phone = null;
-        LocalDate dateOfBirth = null;
-        String email = null;
-        String password = null;
-        Long roleId;
+            Long id = userEntity.getId();
+            String name = userEntity.getName();
+            String lastName = userEntity.getLastName();
+            Integer idDocument = userEntity.getIdDocument();
+            String phone = userEntity.getPhone();
+            LocalDate dateOfBirth = userEntity.getDateOfBirth();
+            String email = userEntity.getEmail();
+            String password = userEntity.getPassword();
+            Long roleId = userEntity.getRoleId().getId();
 
-
-
-        id = userEntity.getId();
-        name = userEntity.getName();
-        lastName = userEntity.getLastName();
-        idDocument = userEntity.getIdDocument();
-        phone = userEntity.getPhone();
-        dateOfBirth = userEntity.getDateOfBirth();
-        email = userEntity.getEmail();
-        password = userEntity.getPassword();
-        roleId = userEntity.getRoleId().getId();
-
-
-        return new User(id, name, lastName, idDocument, phone, dateOfBirth,email , password, roleId);
+            return new User(id, name, lastName, idDocument, phone, dateOfBirth, email, password, roleId);
     }
 
     protected RoleEntity roleToRoleEntity(Role role) {

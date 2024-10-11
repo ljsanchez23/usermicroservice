@@ -23,4 +23,5 @@ public class Constants {
     public static final String IDENTIFICATION_MUST_BE_NUMERIC = "Document ID must be a positive numeric value.";
     public static final String USER_ALREADY_EXISTS = "User already exists";
     public static final String USER_MUST_BE_ADULT = "User must be adult";
+    public static final String USER_NOT_FOUND_ERROR_MESSAGE = "User not found.";
 }

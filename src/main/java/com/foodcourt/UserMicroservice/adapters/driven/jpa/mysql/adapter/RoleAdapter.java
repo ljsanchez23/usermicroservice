@@ -18,4 +18,9 @@ public class RoleAdapter implements IRolePersistencePort {
     public void saveRole(Role role){
         roleRepository.save(roleEntityMapper.toEntity(role));
     }
+
+    @Override
+    public String getRoleNameById(Long id){
+        return roleRepository.getReferenceById(id).getName();
+    }
 }

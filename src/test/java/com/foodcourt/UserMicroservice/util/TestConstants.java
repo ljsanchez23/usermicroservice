@@ -1,5 +1,7 @@
 package com.foodcourt.UserMicroservice.util;
 
+import java.time.LocalDate;
+
 public class TestConstants {
     public static final String MANDATORY_FIELD_NAME_EXCEPTION = "Should throw MandatoryFieldException when name is null";
     public static final String INVALID_EMAIL_EXCEPTION = "Should throw InvalidEmailException when email format is invalid";
@@ -17,4 +19,13 @@ public class TestConstants {
     public static final String VALID_PASSWORD = "encryptedPassword";
     public static final String SHOULD_SAVE_ROLE = "Should save role successfully";
     public static final int ONE_INVOCATION = 1;
+    public static final Long USER_ID = 1L;
+    public static final String USER_NAME = "John Without ";
+    public static final String USER_LAST_NAME = "Fear";
+    public static final Integer USER_ID_DOCUMENT = 1111111;
+    public static final String USER_PHONE = "3222222";
+    public static final LocalDate USER_DOB = LocalDate.of(1998, 12, 23);
+    public static final String USER_EMAIL = "test@example.com";
+    public static final String USER_PASSWORD = "password";
+
 }

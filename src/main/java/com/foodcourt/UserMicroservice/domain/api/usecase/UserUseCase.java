@@ -2,6 +2,7 @@ package com.foodcourt.UserMicroservice.domain.api.usecase;
 
 import com.foodcourt.UserMicroservice.domain.api.IUserServicePort;
 import com.foodcourt.UserMicroservice.domain.exception.UserAlreadyExistsException;
+import com.foodcourt.UserMicroservice.domain.exception.UserNotFoundException;
 import com.foodcourt.UserMicroservice.domain.model.User;
 import com.foodcourt.UserMicroservice.domain.spi.IEncoderPort;
 import com.foodcourt.UserMicroservice.domain.spi.IUserPersistencePort;
@@ -32,5 +33,11 @@ public class UserUseCase implements IUserServicePort {
         String encryptedPassword = encoderPort.encode(user.getPassword());
         user.setPassword(encryptedPassword);
         userPersistencePort.saveUser(user);
+    }
+
+    @Override
+    public User findUserById(Long id){
+        return userPersistencePort.findUserById(id)
+                .orElseThrow(() -> new UserNotFoundException(Constants.USER_NOT_FOUND_ERROR_MESSAGE));
     }
 }

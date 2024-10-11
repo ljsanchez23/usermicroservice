@@ -5,6 +5,8 @@ import com.foodcourt.UserMicroservice.adapters.driven.jpa.mysql.repository.IUser
 import com.foodcourt.UserMicroservice.domain.model.User;
 import com.foodcourt.UserMicroservice.domain.spi.IUserPersistencePort;
 
+import java.util.Optional;
+
 public class UserAdapter implements IUserPersistencePort {
     private final IUserRepository userRepository;
     private final IUserEntityMapper userEntityMapper;
@@ -21,5 +23,10 @@ public class UserAdapter implements IUserPersistencePort {
     @Override
     public boolean existsByEmail(String email){
         return userRepository.findByEmail(email).isPresent();
+    }
+    @Override
+    public Optional<User> findUserById(Long id) {
+        return userRepository.findById(id)
+                .map(userEntityMapper::toModel);
     }
 }
