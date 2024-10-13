@@ -8,7 +8,6 @@ import com.foodcourt.UserMicroservice.domain.model.User;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
-import java.util.Optional;
 
 @Component
 public class IUserEntityMapperImpl implements IUserEntityMapper {

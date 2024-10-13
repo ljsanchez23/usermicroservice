@@ -1,7 +1,7 @@
 package com.foodcourt.UserMicroservice.adapters.driving.mapper.request.impl;
 
-import com.foodcourt.UserMicroservice.adapters.driving.dto.request.UserRequest;
 import com.foodcourt.UserMicroservice.adapters.driving.mapper.request.IUserRequestMapper;
+import com.foodcourt.UserMicroservice.adapters.driving.dto.request.UserRequest;
 import com.foodcourt.UserMicroservice.domain.model.User;
 import org.springframework.stereotype.Component;
 

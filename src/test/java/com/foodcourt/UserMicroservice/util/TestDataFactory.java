@@ -1,8 +1,9 @@
 package com.foodcourt.UserMicroservice.util;
 
+import com.foodcourt.UserMicroservice.domain.model.Authentication;
 import com.foodcourt.UserMicroservice.domain.model.Role;
 import com.foodcourt.UserMicroservice.domain.model.User;
-import com.foodcourt.UserMicroservice.domain.util.DefaultRoles;
+import com.foodcourt.UserMicroservice.configuration.util.DataFactory;
 
 
 public class TestDataFactory {
@@ -18,7 +19,11 @@ public class TestDataFactory {
         return user;
     }
 
+    public static Authentication createDefaultAuthentication(){
+        return new Authentication(TestConstants.AUTHENTICATION_USERNAME, TestConstants.AUTHENTICATION_RAW_PASSWORD, null);
+    }
+
     public static Role createDefaultRole() {
-        return new Role(DefaultRoles.OWNER_ID, DefaultRoles.OWNER_ROLE_NAME);
+        return new Role(DataFactory.OWNER_ROLE_ID, DataFactory.OWNER_ROLE_NAME);
     }
 }

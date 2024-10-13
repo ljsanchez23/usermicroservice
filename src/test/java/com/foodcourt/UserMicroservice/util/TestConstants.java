@@ -28,4 +28,21 @@ public class TestConstants {
     public static final String USER_EMAIL = "test@example.com";
     public static final String USER_PASSWORD = "password";
 
+    public static final String SHOULD_GET_ROLE_NAME_BY_ID = "Should get the role name by id";
+    public static final String SHOULD_THROW_EXCEPTION_WHEN_ROLE_NOT_FOUND = "Should throw exception when role is not found";
+    public static final String ROLE_NAME = "TEST ROLE";
+    public static final Long ROLE_ID = 1L;
+    public static final String SHOULD_FIND_USER_BY_ID = "Should find user by id";
+    public static final String SHOULD_THROW_EXCEPTION_WHEN_USER_NOT_FOUND = "Should throw exception when the user is" +
+            "not found";
+    public static final String AUTHENTICATION_ACCESS = "Login method with correct credentials";
+    public static final String USER_DOES_NOT_EXISTS = "Login method when the user does not exist in the system";
+    public static final String INCORRECT_PASSWORD_EXCEPTION = "Login method when the password is incorrect";
+    public static final String AUTHENTICATION_USERNAME = "test@example.com";
+    public static final String AUTHENTICATION_RAW_PASSWORD = "rawPassword";
+    public static final String VALID_TOKEN = "validToken";
+    public static final String USER_NOT_FOUND = "User not found";
+    public static final String ADMIN_EMAIL = "admin@foodcourt.com";
+    public static final String ADMIN_PASSWORD = "admin";
+    public static final String AUTHENTICATION_WRONG_PASSWORD = "wrongPassword";
 }

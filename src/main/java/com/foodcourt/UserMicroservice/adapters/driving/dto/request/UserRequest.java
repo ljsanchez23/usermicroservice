@@ -3,7 +3,6 @@ package com.foodcourt.UserMicroservice.adapters.driving.dto.request;
 import java.time.LocalDate;
 
 public class UserRequest {
-    private final Long id;
     private final String name;
     private final String lastName;
     private final Integer idDocument;
@@ -12,8 +11,7 @@ public class UserRequest {
     private final String email;
     private final String password;
 
-    public UserRequest(Long id, String name, String lastName, Integer idDocument, String phone, LocalDate dateOfBirth, String email, String password) {
-        this.id = id;
+    public UserRequest(String name, String lastName, Integer idDocument, String phone, LocalDate dateOfBirth, String email, String password) {
         this.name = name;
         this.lastName = lastName;
         this.idDocument = idDocument;
@@ -23,9 +21,6 @@ public class UserRequest {
         this.password = password;
     }
 
-    public Long getId() {
-        return id;
-    }
 
     public String getName() {
         return name;

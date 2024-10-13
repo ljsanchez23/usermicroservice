@@ -29,4 +29,10 @@ public class UserAdapter implements IUserPersistencePort {
         return userRepository.findById(id)
                 .map(userEntityMapper::toModel);
     }
+    @Override
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email)
+                .map(userEntityMapper::toModel)
+                .orElse(null);
+    }
 }

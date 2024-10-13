@@ -1,21 +1,37 @@
 package com.foodcourt.UserMicroservice.configuration;
 
-import com.foodcourt.UserMicroservice.domain.api.IRoleServicePort;
-import com.foodcourt.UserMicroservice.domain.util.DefaultRoles;
+import com.foodcourt.UserMicroservice.adapters.driven.jpa.mysql.entity.UserEntity;
+import com.foodcourt.UserMicroservice.adapters.driven.jpa.mysql.repository.IRoleRepository;
+import com.foodcourt.UserMicroservice.adapters.driven.jpa.mysql.repository.IUserRepository;
+import com.foodcourt.UserMicroservice.configuration.util.DataFactory;
 import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Component;
 
 @Component
 public class DataInitializer {
-    private final IRoleServicePort roleServicePort;
 
-    public DataInitializer(IRoleServicePort roleServicePort) {
-        this.roleServicePort = roleServicePort;
+    private final IRoleRepository roleRepository;
+    private final IUserRepository userRepository;
+    private final DataFactory dataFactory;
+
+    public DataInitializer(IRoleRepository roleRepository, IUserRepository userRepository, DataFactory dataFactory) {
+        this.roleRepository = roleRepository;
+        this.userRepository = userRepository;
+        this.dataFactory = dataFactory;
     }
 
     @PostConstruct
-    public void init(){
-        roleServicePort.saveRole(DefaultRoles.ADMIN);
-        roleServicePort.saveRole(DefaultRoles.OWNER);
+    public void init() {
+        if (!roleRepository.existsById(DataFactory.ADMIN_ROLE.getId())) {
+            roleRepository.save(DataFactory.ADMIN_ROLE);
+        }
+        if (!roleRepository.existsById(DataFactory.OWNER_ROLE.getId())) {
+            roleRepository.save(DataFactory.OWNER_ROLE);
+        }
+
+        UserEntity defaultUser = dataFactory.createDefaultUser();
+        if (!userRepository.existsByEmail(defaultUser.getEmail())) {
+            userRepository.save(defaultUser);
+        }
     }
 }

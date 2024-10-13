@@ -8,4 +8,5 @@ public interface IUserPersistencePort {
     void saveUser(User user);
     boolean existsByEmail(String email);
     Optional<User> findUserById(Long id);
+    User findByEmail(String email);
 }

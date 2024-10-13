@@ -7,7 +7,6 @@ import com.foodcourt.UserMicroservice.domain.model.User;
 import com.foodcourt.UserMicroservice.domain.spi.IEncoderPort;
 import com.foodcourt.UserMicroservice.domain.spi.IUserPersistencePort;
 import com.foodcourt.UserMicroservice.domain.util.Constants;
-import com.foodcourt.UserMicroservice.domain.util.DefaultRoles;
 import com.foodcourt.UserMicroservice.domain.util.Validator;
 
 public class UserUseCase implements IUserServicePort {
@@ -26,7 +25,7 @@ public class UserUseCase implements IUserServicePort {
             throw new UserAlreadyExistsException(Constants.USER_ALREADY_EXISTS);
         }
         if(user.getRoleId() == null){
-            user.setRoleId(DefaultRoles.OWNER_ID);
+            user.setRoleId(Constants.DEFAULT_ROLE_ID);
         }
 
         Validator.validateUser(user);

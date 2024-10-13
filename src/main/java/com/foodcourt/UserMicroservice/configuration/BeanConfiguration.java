@@ -1,18 +1,22 @@
 package com.foodcourt.UserMicroservice.configuration;
 
-import com.foodcourt.UserMicroservice.adapters.driven.encoder.EncoderPort;
+import com.foodcourt.UserMicroservice.adapters.driven.encoder.EncoderAdapter;
 import com.foodcourt.UserMicroservice.adapters.driven.jpa.mysql.adapter.RoleAdapter;
 import com.foodcourt.UserMicroservice.adapters.driven.jpa.mysql.adapter.UserAdapter;
 import com.foodcourt.UserMicroservice.adapters.driven.jpa.mysql.mapper.IRoleEntityMapper;
 import com.foodcourt.UserMicroservice.adapters.driven.jpa.mysql.mapper.IUserEntityMapper;
 import com.foodcourt.UserMicroservice.adapters.driven.jpa.mysql.repository.IRoleRepository;
 import com.foodcourt.UserMicroservice.adapters.driven.jpa.mysql.repository.IUserRepository;
+import com.foodcourt.UserMicroservice.adapters.driven.token.jwt.JwtAdapter;
+import com.foodcourt.UserMicroservice.domain.api.IAuthenticationServicePort;
 import com.foodcourt.UserMicroservice.domain.api.IRoleServicePort;
 import com.foodcourt.UserMicroservice.domain.api.IUserServicePort;
+import com.foodcourt.UserMicroservice.domain.api.usecase.AuthenticationUseCase;
 import com.foodcourt.UserMicroservice.domain.api.usecase.RoleUseCase;
 import com.foodcourt.UserMicroservice.domain.api.usecase.UserUseCase;
 import com.foodcourt.UserMicroservice.domain.spi.IEncoderPort;
 import com.foodcourt.UserMicroservice.domain.spi.IRolePersistencePort;
+import com.foodcourt.UserMicroservice.domain.spi.ITokenPort;
 import com.foodcourt.UserMicroservice.domain.spi.IUserPersistencePort;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -34,7 +38,7 @@ public class BeanConfiguration {
 
     @Bean
     public IEncoderPort encoder(){
-        return new EncoderPort(new BCryptPasswordEncoder());
+        return new EncoderAdapter(new BCryptPasswordEncoder());
     }
 
     @Bean
@@ -56,4 +60,12 @@ public class BeanConfiguration {
     public IRoleServicePort roleServicePort(){
         return new RoleUseCase(rolePersistencePort());
     }
+
+    @Bean
+    public ITokenPort tokenPort(){ return new JwtAdapter(userRepository, userEntityMapper, roleRepository);
+    }
+
+    @Bean
+    public IAuthenticationServicePort authServicePort(){ return new AuthenticationUseCase(userPersistencePort(), encoder(), tokenPort());}
+
 }

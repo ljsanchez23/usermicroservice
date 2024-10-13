@@ -3,11 +3,11 @@ package com.foodcourt.UserMicroservice.adapters.driven.encoder;
 import com.foodcourt.UserMicroservice.domain.spi.IEncoderPort;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-public class EncoderPort implements IEncoderPort {
+public class EncoderAdapter implements IEncoderPort {
 
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public EncoderPort(BCryptPasswordEncoder bCryptPasswordEncoder){
+    public EncoderAdapter(BCryptPasswordEncoder bCryptPasswordEncoder){
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
