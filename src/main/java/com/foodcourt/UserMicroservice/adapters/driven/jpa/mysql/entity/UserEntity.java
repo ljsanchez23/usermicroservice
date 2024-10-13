@@ -19,7 +19,7 @@ public class UserEntity {
     private Integer idDocument;
     @Column(nullable = false)
     private String phone;
-    @Column(nullable = false)
+    @Column(nullable = true)
     private LocalDate dateOfBirth;
     @Column(nullable = false)
     private String email;

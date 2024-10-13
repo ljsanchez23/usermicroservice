@@ -28,10 +28,20 @@ public class DataInitializer {
         if (!roleRepository.existsById(DataFactory.OWNER_ROLE.getId())) {
             roleRepository.save(DataFactory.OWNER_ROLE);
         }
-
-        UserEntity defaultUser = dataFactory.createDefaultUser();
-        if (!userRepository.existsByEmail(defaultUser.getEmail())) {
-            userRepository.save(defaultUser);
+        if(!roleRepository.existsById(DataFactory.EMPLOYEE_ROLE.getId())){
+            roleRepository.save(DataFactory.EMPLOYEE_ROLE);
+        }
+        UserEntity adminUser = dataFactory.createAdminUser();
+        UserEntity ownerUser = dataFactory.createOwnerUser();
+        UserEntity employeeUser = dataFactory.createEmployeeUser();
+        if (!userRepository.existsByEmail(adminUser.getEmail())) {
+            userRepository.save(adminUser);
+        }
+        if (!userRepository.existsByEmail(ownerUser.getEmail())) {
+            userRepository.save(ownerUser);
+        }
+        if (!userRepository.existsByEmail(employeeUser.getEmail())) {
+            userRepository.save(employeeUser);
         }
     }
 }

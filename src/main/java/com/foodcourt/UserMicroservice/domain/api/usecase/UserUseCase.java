@@ -1,6 +1,7 @@
 package com.foodcourt.UserMicroservice.domain.api.usecase;
 
 import com.foodcourt.UserMicroservice.domain.api.IUserServicePort;
+import com.foodcourt.UserMicroservice.domain.exception.InvalidDateOfBirthException;
 import com.foodcourt.UserMicroservice.domain.exception.UserAlreadyExistsException;
 import com.foodcourt.UserMicroservice.domain.exception.UserNotFoundException;
 import com.foodcourt.UserMicroservice.domain.model.User;
@@ -20,14 +21,20 @@ public class UserUseCase implements IUserServicePort {
     }
 
     @Override
-    public void saveUser(User user){
+    public void saveUser(String roleName, User user){
         if(userPersistencePort.existsByEmail(user.getEmail())){
             throw new UserAlreadyExistsException(Constants.USER_ALREADY_EXISTS);
         }
-        if(user.getRoleId() == null){
-            user.setRoleId(Constants.DEFAULT_ROLE_ID);
+        if(roleName.equals(Constants.ROLE_ADMIN)){
+            user.setRoleId(Constants.OWNER_ROLE_ID);
+            if (user.getDateOfBirth() == null) {
+                throw new InvalidDateOfBirthException(Constants.INVALID_DATE_OF_BIRTH);
+            }
+        } else if(roleName.equals(Constants.ROLE_OWNER)){
+            user.setRoleId(Constants.EMPLOYEE_ROLE_ID);
         }
 
+        Validator.validateUser(user);
         Validator.validateUser(user);
         String encryptedPassword = encoderPort.encode(user.getPassword());
         user.setPassword(encryptedPassword);

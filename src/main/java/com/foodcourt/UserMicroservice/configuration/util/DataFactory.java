@@ -22,30 +22,82 @@ public class DataFactory {
     public static final Long OWNER_ROLE_ID = 2L;
     public static final String OWNER_ROLE_NAME = "ROLE_OWNER";
 
+    public static final Long EMPLOYEE_ROLE_ID = 3L;
+    public static final String EMPLOYEE_ROLE_NAME = "ROLE_EMPLOYEE";
+
     public static final RoleEntity ADMIN_ROLE = new RoleEntity(ADMIN_ROLE_ID, ADMIN_ROLE_NAME);
     public static final RoleEntity OWNER_ROLE = new RoleEntity(OWNER_ROLE_ID, OWNER_ROLE_NAME);
+    public static final RoleEntity EMPLOYEE_ROLE = new RoleEntity(EMPLOYEE_ROLE_ID, EMPLOYEE_ROLE_NAME);
 
-    public static final Long USER_ID = 1L;
-    public static final String USER_NAME = "Admin ";
-    public static final String USER_LAST_NAME = "admin";
-    public static final Integer USER_ID_DOCUMENT = 123456789;
-    public static final String USER_PHONE = "+1234567890";
-    public static final LocalDate USER_DATE_OF_BIRTH = LocalDate.of(1990, 1, 1);
-    public static final String USER_EMAIL = "admin@foodcourt.com";
-    public static final String USER_PASSWORD = "admin";
+    public static final Long ADMIN_USER_ID = 1L;
+    public static final String ADMIN_USER_NAME = "Admin ";
+    public static final String ADMIN_USER_LAST_NAME = "admin";
+    public static final Integer ADMIN_USER_ID_DOCUMENT = 11111111;
+    public static final String ADMIN_USER_PHONE = "+111111";
+    public static final LocalDate ADMIN_USER_DATE_OF_BIRTH = LocalDate.of(1990, 1, 1);
+    public static final String ADMIN_USER_EMAIL = "admin@foodcourt.com";
+    public static final String ADMIN_USER_PASSWORD = "admin";
 
-    public UserEntity createDefaultUser() {
-        String encodedPassword = encoderPort.encode(USER_PASSWORD);
+    public static final Long OWNER_USER_ID = 2L;
+    public static final String OWNER_USER_NAME = "Owner ";
+    public static final String OWNER_USER_LAST_NAME = "owner";
+    public static final Integer OWNER_USER_ID_DOCUMENT = 22222222;
+    public static final String OWNER_USER_PHONE = "+222222";
+    public static final LocalDate OWNER_USER_DATE_OF_BIRTH = LocalDate.of(1980, 1, 1);
+    public static final String OWNER_USER_EMAIL = "owner@foodcourt.com";
+    public static final String OWNER_USER_PASSWORD = "owner";
+
+    public static final Long EMPLOYEE_USER_ID = 3L;
+    public static final String EMPLOYEE_USER_NAME = "Employee ";
+    public static final String EMPLOYEE_USER_LAST_NAME = "employee";
+    public static final Integer EMPLOYEE_USER_ID_DOCUMENT = 33333333;
+    public static final String EMPLOYEE_USER_PHONE = "+33333";
+    public static final LocalDate EMPLOYEE_USER_DATE_OF_BIRTH = LocalDate.of(2000, 1, 1);
+    public static final String EMPLOYEE_USER_EMAIL = "employee@foodcourt.com";
+    public static final String EMPLOYEE_USER_PASSWORD = "employee";
+
+    public UserEntity createAdminUser() {
+        String encodedPassword = encoderPort.encode(ADMIN_USER_PASSWORD);
         return new UserEntity(
-                USER_ID,
-                USER_NAME,
-                USER_LAST_NAME,
-                USER_ID_DOCUMENT,
-                USER_PHONE,
-                USER_DATE_OF_BIRTH,
-                USER_EMAIL,
+                ADMIN_USER_ID,
+                ADMIN_USER_NAME,
+                ADMIN_USER_LAST_NAME,
+                ADMIN_USER_ID_DOCUMENT,
+                ADMIN_USER_PHONE,
+                ADMIN_USER_DATE_OF_BIRTH,
+                ADMIN_USER_EMAIL,
                 encodedPassword,
                 ADMIN_ROLE
+        );
+    }
+
+    public UserEntity createOwnerUser(){
+        String encodedPassword = encoderPort.encode(OWNER_USER_PASSWORD);
+        return new UserEntity(
+                OWNER_USER_ID,
+                OWNER_USER_NAME,
+                OWNER_USER_LAST_NAME,
+                OWNER_USER_ID_DOCUMENT,
+                OWNER_USER_PHONE,
+                OWNER_USER_DATE_OF_BIRTH,
+                OWNER_USER_EMAIL,
+                encodedPassword,
+                OWNER_ROLE
+        );
+    }
+
+    public UserEntity createEmployeeUser(){
+        String encodedPassword = encoderPort.encode(EMPLOYEE_USER_PASSWORD);
+        return new UserEntity(
+                EMPLOYEE_USER_ID,
+                EMPLOYEE_USER_NAME,
+                EMPLOYEE_USER_LAST_NAME,
+                EMPLOYEE_USER_ID_DOCUMENT,
+                EMPLOYEE_USER_PHONE,
+                EMPLOYEE_USER_DATE_OF_BIRTH,
+                EMPLOYEE_USER_EMAIL,
+                encodedPassword,
+                EMPLOYEE_ROLE
         );
     }
 }

@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
@@ -58,13 +57,6 @@ class ValidatorTest {
         assertThrows(InvalidDocumentException.class, () -> Validator.validateUser(validUser));
     }
 
-    @Test
-    @DisplayName(TestConstants.UNDERAGE_USER_EXCEPTION)
-    void shouldThrowExceptionWhenUserIsUnderage() {
-        validUser.setDateOfBirth(LocalDate.now().minusYears(TestConstants.UNDERAGE_USER));
-
-        assertThrows(UnderageUserException.class, () -> Validator.validateUser(validUser));
-    }
 
     @Test
     @DisplayName(TestConstants.SHOULD_NOT_THROW_EXCEPTION)

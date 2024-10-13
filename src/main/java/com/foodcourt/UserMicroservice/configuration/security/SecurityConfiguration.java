@@ -35,7 +35,8 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(SecurityConstants.DATA_INITIALIZER_PATH).permitAll()
                         .requestMatchers(SecurityConstants.LOGIN_URL).permitAll()
-                        .requestMatchers(SecurityConstants.CREATE_USER_URL).hasRole(SecurityConstants.ADMIN_ROLE)
+                        .requestMatchers(SecurityConstants.CREATE_USER_URL).hasAnyRole(SecurityConstants.ADMIN_ROLE,
+                                SecurityConstants.OWNER_ROLE)
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)

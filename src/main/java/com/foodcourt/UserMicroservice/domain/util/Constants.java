@@ -24,10 +24,14 @@ public class Constants {
     public static final String USER_ALREADY_EXISTS = "User already exists";
     public static final String USER_MUST_BE_ADULT = "User must be adult";
     public static final String USER_NOT_FOUND_ERROR_MESSAGE = "User not found.";
-    public static final Long DEFAULT_ROLE_ID = 2L;
     public static final String INVALID_CREDENTIALS = "Invalid credentials";
     public static final String INVALID_USERNAME = "Invalid username";
     public static final String INVALID_PASSWORD = "Invalid password";
     public static final String USER_NOT_FOUND = "User not found";
     public static final String ROLE_NOT_FOUND = "Role not found";
+    public static final String ROLE_ADMIN = "ROLE_ADMIN";
+    public static final String ROLE_OWNER = "ROLE_OWNER";
+    public static final Long OWNER_ROLE_ID = 2L;
+    public static final Long EMPLOYEE_ROLE_ID = 3L;
+    public static final String INVALID_DATE_OF_BIRTH = "Owners must have a date of birth";
 }

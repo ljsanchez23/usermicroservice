@@ -16,10 +16,17 @@ public class AdaptersConstants {
     public static final String ID_PATH_VARIABLE = "id";
     public static final String LOGIN_URL = "/login";
     public static final String AUTHENTICATION_ENDPOINT_SUMMARY = "This is the endpoint for the authentication";
-    public static final String AUTHENTICATION_ENDPOINT_DESCRIPTION = "This enpoint can be used to access the system";
+    public static final String AUTHENTICATION_ENDPOINT_DESCRIPTION = "This endpoint can be used to access the system";
     public static final String OK = "200";
     public static final String AUTHENTICATION_OK_DESCRIPTION = "If the authentication is successful a 200 response code" +
             "will be given";
     public static final String AUTHENTICATION_BAD_REQUEST_DESCRIPTION = "If the authentication does not got through a 400" +
             "code will be given";
+    public static final String AUTHORITY_FROM_TOKEN = "authority";
+    public static final String JWT_ROLE_NOT_FOUND = "JWT role not found";
+    public static final String GET_USER_BY_ID_ENDPOINT_SUMMARY = "Get user by id endpoint";
+    public static final String GET_USER_BY_ID_ENDPOINT_DESCRIPTION = "This endpoint can be used to get an user by the id";
+    public static final String GET_USER_BY_ID_OK_DESCRIPTION = "If the user exists you'll receive the user and a 200 response code";
+    public static final String GET_USER_BY_ID_BAD_REQUEST_DESCRIPTION = "If the user does not exists you'll receive a bad " +
+            "request";
 }

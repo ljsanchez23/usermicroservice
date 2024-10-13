@@ -1,9 +1,12 @@
 package com.foodcourt.UserMicroservice.adapters.driven.token.jwt;
 
+import com.foodcourt.UserMicroservice.adapters.driven.jpa.mysql.entity.RoleEntity;
 import com.foodcourt.UserMicroservice.adapters.driven.jpa.mysql.entity.UserEntity;
 import com.foodcourt.UserMicroservice.adapters.driven.jpa.mysql.mapper.IUserEntityMapper;
 import com.foodcourt.UserMicroservice.adapters.driven.jpa.mysql.repository.IRoleRepository;
 import com.foodcourt.UserMicroservice.adapters.driven.jpa.mysql.repository.IUserRepository;
+import com.foodcourt.UserMicroservice.adapters.driven.token.util.JwtRoleNotFoundException;
+import com.foodcourt.UserMicroservice.adapters.util.AdaptersConstants;
 import com.foodcourt.UserMicroservice.configuration.security.util.SecurityConstants;
 import com.foodcourt.UserMicroservice.domain.model.User;
 import com.foodcourt.UserMicroservice.domain.spi.ITokenPort;
@@ -25,13 +28,19 @@ public class JwtAdapter implements ITokenPort {
 
     @Override
     public String getToken(String email) {
+
         UserEntity userEntity = userRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException(SecurityConstants.JWT_USER_NOT_FOUND + email));
 
         User user = userEntityMapper.toModel(userEntity);
-        String roleName = roleRepository.findById(user.getId()).get().getName();
-        Long userId = user.getId();
 
+        Long roleId = user.getRoleId();
+
+        RoleEntity roleEntity = roleRepository.findById(roleId)
+                .orElseThrow(() -> new JwtRoleNotFoundException(AdaptersConstants.JWT_ROLE_NOT_FOUND));
+
+        String roleName = roleEntity.getName();
+        Long userId = user.getId();
 
         return Jwts.builder()
                 .id(SecurityConstants.JWT_ID)

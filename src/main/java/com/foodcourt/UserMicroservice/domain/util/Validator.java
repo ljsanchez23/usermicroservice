@@ -14,7 +14,6 @@ public class Validator {
         validateEmail(user.getEmail());
         validatePhone(user.getPhone());
         validateIdDocument(user.getIdDocument());
-        validateAge(user.getDateOfBirth());
     }
 
     public static void validateAuthentication(Authentication authentication){
@@ -34,7 +33,6 @@ public class Validator {
         checkMandatory(user.getLastName(), Constants.LAST_NAME_MANDATORY);
         checkMandatory(user.getIdDocument(), Constants.ID_DOCUMENT_MANDATORY);
         checkMandatory(user.getPhone(), Constants.PHONE_MANDATORY);
-        checkMandatory(user.getDateOfBirth(), Constants.DOB_MANDATORY);
         checkMandatory(user.getEmail(), Constants.EMAIL_MANDATORY);
         checkMandatory(user.getPassword(), Constants.PASSWORD_MANDATORY);
     }
@@ -65,7 +63,7 @@ public class Validator {
         }
     }
 
-    private static void validateAge(LocalDate dateOfBirth) {
+    public static void validateAge(LocalDate dateOfBirth) {
         LocalDate currentDate = LocalDate.now();
         int age = Period.between(dateOfBirth, currentDate).getYears();
 

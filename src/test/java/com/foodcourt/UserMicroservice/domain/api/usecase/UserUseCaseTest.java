@@ -40,7 +40,7 @@ class UserUseCaseTest {
         when(userPersistencePort.existsByEmail(user.getEmail())).thenReturn(true);
 
         UserAlreadyExistsException thrown =
-                assertThrows(UserAlreadyExistsException.class, () -> userUseCase.saveUser(user));
+                assertThrows(UserAlreadyExistsException.class, () -> userUseCase.saveUser(DataFactory.ADMIN_ROLE_NAME,user));
 
         assertEquals(Constants.USER_ALREADY_EXISTS, thrown.getMessage());
     }
@@ -54,7 +54,7 @@ class UserUseCaseTest {
         when(userPersistencePort.existsByEmail(user.getEmail())).thenReturn(false);
         when(encoderPort.encode(user.getPassword())).thenReturn(TestConstants.VALID_PASSWORD);
 
-        userUseCase.saveUser(user);
+        userUseCase.saveUser(DataFactory.ADMIN_ROLE_NAME,user);
 
         verify(userPersistencePort).saveUser(user);
         assertNotNull(user.getRoleId());

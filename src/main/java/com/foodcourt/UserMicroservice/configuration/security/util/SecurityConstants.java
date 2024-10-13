@@ -9,7 +9,7 @@ public class SecurityConstants {
 
     public static final String JWT_HEADER = "Authorization";
     public static final String JWT_BEARER = "Bearer ";
-    public static final String JWT_SECRET_KEY = "VOhduvxl4WR2azOsHG7ULDF2w+gRl4DDyCoqy9MsUWROOGoK0sPCuuM7sg2JPLFt";
+    public static final String JWT_SECRET_KEY = System.getenv("SECRET_KEY");
     public static final String JWT_USER_NOT_FOUND = "User not found with the email: ";
     public static final String JWT_ID = "foodcourt";
     public static final String JWT_AUTHORITY = "authority";
@@ -27,8 +27,7 @@ public class SecurityConstants {
     public static final String USER_ID = "userId";
     public static final String APPLICATION_JSON = "application/json";
     public static final String WRITER = "{\"error\": \"Unauthorized\", \"message\": \"Invalid or missing token.\"}";
-
-
+    public static final String OWNER_ROLE = "OWNER";
 
 
     public static SecretKey getSignedKey(String secretKey){
