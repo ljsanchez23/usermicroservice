@@ -34,4 +34,5 @@ public class Constants {
     public static final Long OWNER_ROLE_ID = 2L;
     public static final Long EMPLOYEE_ROLE_ID = 3L;
     public static final String INVALID_DATE_OF_BIRTH = "Owners must have a date of birth";
+    public static final Long CUSTOMER_ROLE_ID = 4L;
 }

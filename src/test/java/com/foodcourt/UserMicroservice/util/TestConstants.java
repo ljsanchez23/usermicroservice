@@ -45,4 +45,5 @@ public class TestConstants {
     public static final String ADMIN_EMAIL = "admin@foodcourt.com";
     public static final String ADMIN_PASSWORD = "admin";
     public static final String AUTHENTICATION_WRONG_PASSWORD = "wrongPassword";
+    public static final String SHOULD_SAVE_CUSTOMER = "Should save customer with encrypted password and default role";
 }

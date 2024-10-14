@@ -28,6 +28,7 @@ public class SecurityConstants {
     public static final String APPLICATION_JSON = "application/json";
     public static final String WRITER = "{\"error\": \"Unauthorized\", \"message\": \"Invalid or missing token.\"}";
     public static final String OWNER_ROLE = "OWNER";
+    public static final String CUSTOMER_REGISTRATION_URL = "/register";
 
 
     public static SecretKey getSignedKey(String secretKey){

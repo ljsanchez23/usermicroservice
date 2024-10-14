@@ -60,4 +60,17 @@ public class UserController {
         String roleName = roleServicePort.getRoleNameById(roleId);
         return ResponseEntity.ok(roleName);
     }
+    @Operation(summary = AdaptersConstants.CUSTOMER_REGISTRATION_ENDPOINT_SUMMARY, description = AdaptersConstants.CUSTOMER_REGISTRATION_ENDPOINT_DESCRIPTION)
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = AdaptersConstants.OK, description = AdaptersConstants.CUSTOMER_REGISTRATION_OK_DESCRIPTION,
+                    content = @Content(mediaType = AdaptersConstants.JSON, schema = @Schema(implementation = String.class))),
+            @ApiResponse(responseCode = AdaptersConstants.BAD_REQUEST, description = AdaptersConstants.CUSTOMER_REGISTRATION_BAD_REQUEST_DESCRIPTION,
+                    content = @Content(mediaType = AdaptersConstants.JSON, schema = @Schema(implementation = String.class)))
+    })
+    @PostMapping(AdaptersConstants.CUSTOMER_REGISTRATION_URL)
+    public ResponseEntity<Void> saveCustomer(@RequestBody UserRequest userRequest, HttpServletRequest request){
+        User user = userRequestMapper.toModel(userRequest);
+        userServicePort.saveCustomer(user);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
 }

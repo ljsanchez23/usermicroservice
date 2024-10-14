@@ -31,6 +31,9 @@ public class DataInitializer {
         if(!roleRepository.existsById(DataFactory.EMPLOYEE_ROLE.getId())){
             roleRepository.save(DataFactory.EMPLOYEE_ROLE);
         }
+        if(!roleRepository.existsById(DataFactory.CUSTOMER_ROLE.getId())){
+            roleRepository.save(DataFactory.CUSTOMER_ROLE);
+        }
         UserEntity adminUser = dataFactory.createAdminUser();
         UserEntity ownerUser = dataFactory.createOwnerUser();
         UserEntity employeeUser = dataFactory.createEmployeeUser();

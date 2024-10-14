@@ -25,9 +25,13 @@ public class DataFactory {
     public static final Long EMPLOYEE_ROLE_ID = 3L;
     public static final String EMPLOYEE_ROLE_NAME = "ROLE_EMPLOYEE";
 
+    public static final Long CUSTOMER_ROLE_ID = 4L;
+    public static final String CUSTOMER_ROLE_NAME = "ROLE_CUSTOMER";
+
     public static final RoleEntity ADMIN_ROLE = new RoleEntity(ADMIN_ROLE_ID, ADMIN_ROLE_NAME);
     public static final RoleEntity OWNER_ROLE = new RoleEntity(OWNER_ROLE_ID, OWNER_ROLE_NAME);
     public static final RoleEntity EMPLOYEE_ROLE = new RoleEntity(EMPLOYEE_ROLE_ID, EMPLOYEE_ROLE_NAME);
+    public static final RoleEntity CUSTOMER_ROLE = new RoleEntity(CUSTOMER_ROLE_ID, CUSTOMER_ROLE_NAME);
 
     public static final Long ADMIN_USER_ID = 1L;
     public static final String ADMIN_USER_NAME = "Admin ";

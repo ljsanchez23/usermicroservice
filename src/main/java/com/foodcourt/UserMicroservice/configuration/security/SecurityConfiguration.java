@@ -37,6 +37,7 @@ public class SecurityConfiguration {
                         .requestMatchers(SecurityConstants.LOGIN_URL).permitAll()
                         .requestMatchers(SecurityConstants.CREATE_USER_URL).hasAnyRole(SecurityConstants.ADMIN_ROLE,
                                 SecurityConstants.OWNER_ROLE)
+                        .requestMatchers(SecurityConstants.CUSTOMER_REGISTRATION_URL).permitAll()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)

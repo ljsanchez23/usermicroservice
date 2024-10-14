@@ -29,4 +29,10 @@ public class AdaptersConstants {
     public static final String GET_USER_BY_ID_OK_DESCRIPTION = "If the user exists you'll receive the user and a 200 response code";
     public static final String GET_USER_BY_ID_BAD_REQUEST_DESCRIPTION = "If the user does not exists you'll receive a bad " +
             "request";
+    public static final String CUSTOMER_REGISTRATION_URL = "/register";
+    public static final String CUSTOMER_REGISTRATION_ENDPOINT_SUMMARY = "Endpoint for customer's registration";
+    public static final String CUSTOMER_REGISTRATION_ENDPOINT_DESCRIPTION = "Endpoint for customer's description";
+
+    public static final String CUSTOMER_REGISTRATION_OK_DESCRIPTION = "If the customer is created a 200 response will be given";
+    public static final String CUSTOMER_REGISTRATION_BAD_REQUEST_DESCRIPTION = "if the customer is not created a 400 code will be given";
 }

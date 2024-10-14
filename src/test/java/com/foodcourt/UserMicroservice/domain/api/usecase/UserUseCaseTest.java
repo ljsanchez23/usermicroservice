@@ -85,4 +85,20 @@ class UserUseCaseTest {
         assertThrows(UserNotFoundException.class, () -> userUseCase.findUserById(userId));
         verify(userPersistencePort, times(TestConstants.ONE_INVOCATION)).findUserById(userId);
     }
+
+    @Test
+    @DisplayName(TestConstants.SHOULD_SAVE_CUSTOMER)
+    void shouldSaveCustomerWithEncryptedPasswordAndDefaultRole() {
+        User user = TestDataFactory.createDefaultUser();
+        user.setPassword(TestConstants.VALID_PASSWORD);
+
+        lenient().when(userPersistencePort.existsByEmail(user.getEmail())).thenReturn(false);
+        lenient().when(encoderPort.encode(user.getPassword())).thenReturn(TestConstants.VALID_PASSWORD);
+
+        userUseCase.saveCustomer(user);
+
+        assertEquals(Constants.CUSTOMER_ROLE_ID, user.getRoleId());
+        assertEquals(TestConstants.VALID_PASSWORD, user.getPassword());
+        verify(userPersistencePort).saveUser(user);
+    }
 }

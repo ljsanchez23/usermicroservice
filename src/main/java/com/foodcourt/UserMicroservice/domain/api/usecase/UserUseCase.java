@@ -35,7 +35,6 @@ public class UserUseCase implements IUserServicePort {
         }
 
         Validator.validateUser(user);
-        Validator.validateUser(user);
         String encryptedPassword = encoderPort.encode(user.getPassword());
         user.setPassword(encryptedPassword);
         userPersistencePort.saveUser(user);
@@ -45,5 +44,14 @@ public class UserUseCase implements IUserServicePort {
     public User findUserById(Long id){
         return userPersistencePort.findUserById(id)
                 .orElseThrow(() -> new UserNotFoundException(Constants.USER_NOT_FOUND_ERROR_MESSAGE));
+    }
+
+    @Override
+    public void saveCustomer(User user){
+        Validator.validateUser(user);
+        String encryptedPassword = encoderPort.encode(user.getPassword());
+        user.setRoleId(Constants.CUSTOMER_ROLE_ID);
+        user.setPassword(encryptedPassword);
+        userPersistencePort.saveUser(user);
     }
 }
