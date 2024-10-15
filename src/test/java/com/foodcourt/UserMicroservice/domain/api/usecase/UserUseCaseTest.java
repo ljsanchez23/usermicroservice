@@ -4,6 +4,7 @@ import com.foodcourt.UserMicroservice.domain.exception.UserAlreadyExistsExceptio
 import com.foodcourt.UserMicroservice.domain.exception.UserNotFoundException;
 import com.foodcourt.UserMicroservice.domain.model.User;
 import com.foodcourt.UserMicroservice.domain.spi.IEncoderPort;
+import com.foodcourt.UserMicroservice.domain.spi.IFoodCourtPort;
 import com.foodcourt.UserMicroservice.domain.spi.IUserPersistencePort;
 import com.foodcourt.UserMicroservice.domain.util.Constants;
 import com.foodcourt.UserMicroservice.configuration.util.DataFactory;
@@ -27,6 +28,8 @@ class UserUseCaseTest {
     private IUserPersistencePort userPersistencePort;
     @Mock
     private IEncoderPort encoderPort;
+    @Mock
+    private IFoodCourtPort foodCourtPort;
 
     @InjectMocks
     private UserUseCase userUseCase;
@@ -100,5 +103,61 @@ class UserUseCaseTest {
         assertEquals(Constants.CUSTOMER_ROLE_ID, user.getRoleId());
         assertEquals(TestConstants.VALID_PASSWORD, user.getPassword());
         verify(userPersistencePort).saveUser(user);
+    }
+
+    @Test
+    @DisplayName(TestConstants.SHOULD_THROW_EXCEPTION_WHEN_USER_EXISTS)
+    void shouldThrowExceptionWhenEmailAlreadyExists() {
+
+        User user = new User();
+        user.setEmail(TestConstants.USER_EMAIL);
+
+        when(userPersistencePort.existsByEmail(user.getEmail())).thenReturn(true);
+
+        UserAlreadyExistsException exception = assertThrows(UserAlreadyExistsException.class, () -> {
+            userUseCase.saveEmployee(user);
+        });
+
+        assertEquals(Constants.USER_ALREADY_EXISTS, exception.getMessage());
+
+        verify(userPersistencePort, never()).saveEmployee(any(User.class));
+    }
+
+    @Test
+    @DisplayName(TestConstants.SHOULD_SAVE_EMPLOYEE)
+    void shouldEncryptPasswordAndSaveEmployeeWhenEmailDoesNotExist() {
+
+        User user = TestDataFactory.createDefaultUser();
+        user.setEmail(TestConstants.USER_EMAIL);
+        user.setPassword(TestConstants.PLAIN_TEXT_PASSWORD);
+
+
+        when(userPersistencePort.existsByEmail(user.getEmail())).thenReturn(false);
+
+        when(encoderPort.encode(user.getPassword())).thenReturn(TestConstants.VALID_PASSWORD);
+
+        when(userPersistencePort.saveEmployee(any(User.class))).thenAnswer(invocation -> {
+            User savedUser = invocation.getArgument(TestConstants.INVOCATION_ARGUMENT);
+            savedUser.setId(TestConstants.USER_ID);
+            return savedUser;
+        });
+
+        User savedUser = userUseCase.saveEmployee(user);
+
+        assertEquals(TestConstants.VALID_PASSWORD, savedUser.getPassword());
+        assertEquals(Constants.EMPLOYEE_ROLE_ID, savedUser.getRoleId());
+
+        verify(userPersistencePort).saveEmployee(user);
+    }
+
+    @Test
+    @DisplayName(TestConstants.SHOULD_CALL_FOOD_COURT_PORT)
+    void ShouldCallFoodCourtPort() {
+        Long restaurantId = TestConstants.RESTAURANT_ID;
+        Long employeeId = TestConstants.EMPLOYEE_ID;
+
+        userUseCase.addEmployeeToRestaurant(restaurantId, employeeId);
+
+        verify(foodCourtPort).addEmployeeToRestaurant(restaurantId, employeeId);
     }
 }

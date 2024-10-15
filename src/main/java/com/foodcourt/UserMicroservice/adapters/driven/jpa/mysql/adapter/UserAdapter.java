@@ -1,7 +1,9 @@
 package com.foodcourt.UserMicroservice.adapters.driven.jpa.mysql.adapter;
 
+import com.foodcourt.UserMicroservice.adapters.driven.jpa.mysql.entity.UserEntity;
 import com.foodcourt.UserMicroservice.adapters.driven.jpa.mysql.mapper.IUserEntityMapper;
 import com.foodcourt.UserMicroservice.adapters.driven.jpa.mysql.repository.IUserRepository;
+import com.foodcourt.UserMicroservice.domain.exception.UserNotFoundException;
 import com.foodcourt.UserMicroservice.domain.model.User;
 import com.foodcourt.UserMicroservice.domain.spi.IUserPersistencePort;
 
@@ -34,5 +36,14 @@ public class UserAdapter implements IUserPersistencePort {
         return userRepository.findByEmail(email)
                 .map(userEntityMapper::toModel)
                 .orElse(null);
+    }
+
+    @Override
+    public User saveEmployee(User user) {
+        // Guarda el usuario en la base de datos
+        UserEntity savedUserEntity = userRepository.save(userEntityMapper.toEntity(user));
+
+        // Devuelve el usuario mapeado con su ID
+        return userEntityMapper.toModel(savedUserEntity);
     }
 }

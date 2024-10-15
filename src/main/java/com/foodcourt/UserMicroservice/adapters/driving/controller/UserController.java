@@ -1,7 +1,11 @@
 package com.foodcourt.UserMicroservice.adapters.driving.controller;
 
+import com.foodcourt.UserMicroservice.adapters.driven.feign.client.IFoodCourtFeignClient;
+import com.foodcourt.UserMicroservice.adapters.driven.feign.client.util.EmployeeIdRequest;
 import com.foodcourt.UserMicroservice.adapters.driven.token.jwt.JwtValidate;
+import com.foodcourt.UserMicroservice.adapters.driving.dto.request.EmployeeRequest;
 import com.foodcourt.UserMicroservice.adapters.driving.dto.request.UserRequest;
+import com.foodcourt.UserMicroservice.adapters.driving.mapper.request.IEmployeeRequestMapper;
 import com.foodcourt.UserMicroservice.adapters.driving.mapper.request.IUserRequestMapper;
 import com.foodcourt.UserMicroservice.adapters.util.AdaptersConstants;
 import com.foodcourt.UserMicroservice.domain.api.IRoleServicePort;
@@ -24,11 +28,13 @@ public class UserController {
     private final IUserServicePort userServicePort;
     private final IUserRequestMapper userRequestMapper;
     private final IRoleServicePort roleServicePort;
+    private final IEmployeeRequestMapper employeeRequestMapper;
 
-    public UserController(IUserServicePort userServicePort, IUserRequestMapper userRequestMapper, IRoleServicePort roleServicePort) {
+    public UserController(IUserServicePort userServicePort, IUserRequestMapper userRequestMapper, IRoleServicePort roleServicePort, IEmployeeRequestMapper employeeRequestMapper) {
         this.userServicePort = userServicePort;
         this.userRequestMapper = userRequestMapper;
         this.roleServicePort = roleServicePort;
+        this.employeeRequestMapper = employeeRequestMapper;
     }
 
     @Operation(summary = AdaptersConstants.ENDPOINT_SUMMARY, description = AdaptersConstants.ENDPOINT_DESCRIPTION)
@@ -71,6 +77,27 @@ public class UserController {
     public ResponseEntity<Void> saveCustomer(@RequestBody UserRequest userRequest, HttpServletRequest request){
         User user = userRequestMapper.toModel(userRequest);
         userServicePort.saveCustomer(user);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @Operation(summary = AdaptersConstants.ADD_EMPLOYEE_ENDPOINT_SUMMARY, description = AdaptersConstants.ADD_EMPLOYEE_ENDPOINT_DESCRIPTION)
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = AdaptersConstants.OK, description = AdaptersConstants.ADD_EMPLOYEE_OK_DESCRIPTION,
+                    content = @Content(mediaType = AdaptersConstants.JSON, schema = @Schema(implementation = String.class))),
+            @ApiResponse(responseCode = AdaptersConstants.BAD_REQUEST, description = AdaptersConstants.ADD_EMPLOYEE_BAD_REQUEST_DESCRIPTION,
+                    content = @Content(mediaType = AdaptersConstants.JSON, schema = @Schema(implementation = String.class)))
+    })
+    @PostMapping(AdaptersConstants.ADD_EMPLOYEE_URL)
+    public ResponseEntity<Void> saveEmployee(@RequestBody EmployeeRequest employeeRequest) {
+
+        User employee = employeeRequestMapper.toModel(employeeRequest);
+
+        User savedEmployee = userServicePort.saveEmployee(employee);
+
+        Long restaurantId = employeeRequest.getRestaurantId();
+
+        userServicePort.addEmployeeToRestaurant(restaurantId, savedEmployee.getId());
+
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 }

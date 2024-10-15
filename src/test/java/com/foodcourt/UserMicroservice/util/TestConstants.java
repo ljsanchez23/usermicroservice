@@ -46,4 +46,11 @@ public class TestConstants {
     public static final String ADMIN_PASSWORD = "admin";
     public static final String AUTHENTICATION_WRONG_PASSWORD = "wrongPassword";
     public static final String SHOULD_SAVE_CUSTOMER = "Should save customer with encrypted password and default role";
+    public static final Long RESTAURANT_ID = 1L;
+    public static final Long EMPLOYEE_ID = 2L;
+    public static final String SHOULD_CALL_FOOD_COURT_PORT = "Should call food court port and save the employee";
+    public static final String PLAIN_TEXT_PASSWORD = "plaintextpassword";
+    public static final int INVOCATION_ARGUMENT = 0;
+    public static final String SHOULD_SAVE_EMPLOYEE = "Should save the employee";
+    public static final String SHOULD_THROW_EXCEPTION_WHEN_USER_EXISTS = "Should throw exception when user exists";
 }

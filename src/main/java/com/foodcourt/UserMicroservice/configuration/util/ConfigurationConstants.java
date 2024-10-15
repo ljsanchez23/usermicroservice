@@ -9,4 +9,6 @@ public class ConfigurationConstants {
     public static final String APP_VERSION = "1.0";
     public static final String APP_NAME = "User Microservice";
     public static final String APP_DESCRIPTION = "API documentation for the User Microservice. Part of the food court project.";
+    public static final String MESSAGE_FIELD = "message";
+    public static final String ERROR_HAS_OCCURRED = "An error has occurred";
 }

@@ -35,4 +35,15 @@ public class AdaptersConstants {
 
     public static final String CUSTOMER_REGISTRATION_OK_DESCRIPTION = "If the customer is created a 200 response will be given";
     public static final String CUSTOMER_REGISTRATION_BAD_REQUEST_DESCRIPTION = "if the customer is not created a 400 code will be given";
+    public static final String FOOD_COURT_CLIENT_NAME = "FoodCourtMicroservice";
+    public static final String FOOD_COURT_CLIENT_URL = "localhost:8181";
+    public static final String ADD_EMPLOYEE_URL = "/restaurant/addEmployee";
+    public static final String ADD_EMPLOYEE_ENDPOINT_SUMMARY = "Endpoint used to add the employees";
+    public static final String ADD_EMPLOYEE_ENDPOINT_DESCRIPTION = "When this endpoint is used an employee is created in the" +
+            "database";
+    public static final String ADD_EMPLOYEE_OK_DESCRIPTION = "If the employee is added to the restaurant, a 200 response code" +
+            "will be given";
+    public static final String ADD_EMPLOYEE_BAD_REQUEST_DESCRIPTION = "If the employee is not added to the restaurant, a 400 response code" +
+            "will be given";
+    public static final String FOOD_COURT_ADD_EMPLOYEE_ENDPOINT = "/restaurant/addEmployee";
 }
